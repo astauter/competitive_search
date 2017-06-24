@@ -6,7 +6,7 @@ const minimax = minimaxLib.minimax;
 const makeMove = minimaxLib.makeMove;
 const heuristic = minimaxLib.heuristic;
 
-/* 
+/*
    A heuristic takes as input some particular game state.
    and outputs a number indicating how good / bad that state is.
 
@@ -22,7 +22,7 @@ const heuristic = minimaxLib.heuristic;
       trying to maximize the score, unlike the other who is trying to minimize.
       This will either be an 'x' string or an 'o' string.
 
-      It will return a positive or negative number. 
+      It will return a positive or negative number.
  */
 describe("Testing some basic functionality for the heuristics", function(){
 
@@ -34,12 +34,12 @@ describe("Testing some basic functionality for the heuristics", function(){
 	});
 
 	/* Second, remember that the "maximizing player" and the "minimizing player"
-	   are only maximizing and minimizing players by convention.  They are a 
-	   feature of the map, and not the territory; of how we're looking at 
+	   are only maximizing and minimizing players by convention.  They are a
+	   feature of the map, and not the territory; of how we're looking at
 	   the game, and not the game itself.
 
 	   So if we switch the players, we should get exactly the same value, except
-	   multiplied by -1.*/ 
+	   multiplied by -1.*/
 
 	it("Returns the negative of the value for one player when maximizing player is switched", function(){
 		for(let x = 0; x < 100; x++){
@@ -51,9 +51,9 @@ describe("Testing some basic functionality for the heuristics", function(){
 		}
 	});
 
-	/* The rest of these all are basically checking to see if 
+	/* The rest of these all are basically checking to see if
 	   the program returns some kind of reasonable values in cases when, although
-	   there are equal numbers of pieces on the board, 'x' has more in a line 
+	   there are equal numbers of pieces on the board, 'x' has more in a line
 	   together than 'o' does. */
 	it("It returns a higher score when 'x' has two in a single line, and 'o' has two disconnected", function(){
 		//Make a new game state
@@ -64,6 +64,7 @@ describe("Testing some basic functionality for the heuristics", function(){
 		s = s.move(1)  //X moves
 		s = s.move(0)  //O moves
 		let higher = heuristic(s, 'x')
+		//console.log('lower:', lower, 'higher:', higher)
 		expect(typeof lower == 'number').to.equal(true);
 		expect(typeof higher == 'number').to.equal(true);
 		expect(lower < higher).to.equal(true);
@@ -108,7 +109,7 @@ describe("Testing some basic functionality for the heuristics", function(){
 
 describe('Testing some basic functions in the minimax evaluation function', function(){
 
-	/* The depth which is passed to the minimax function tells it how many 
+	/* The depth which is passed to the minimax function tells it how many
 	   layers down to go.
 
 	   So when it is called with a depth of zero, it should
@@ -136,8 +137,8 @@ describe('Testing some basic functions in the minimax evaluation function', func
 	it('Also returns simply the value of the heuristic function when there are no moves left to make', function(){
 		for(let x = 0; x < 5; x++){
 			//Make a new game state, with a board height of 1 so
-			//that s.nextStates or s.legalMoves returns an array 
-			//of length zero after we've filled the first 
+			//that s.nextStates or s.legalMoves returns an array
+			//of length zero after we've filled the first
 			//and last row entirely.
 			let s = new State({height: 1});
 			s = s.move(0)
@@ -148,6 +149,8 @@ describe('Testing some basic functions in the minimax evaluation function', func
 			s = s.move(5)
 			s = s.move(6)
 			let heuristicValue = heuristic(s, 'x');
+			console.log(s)
+			console.log(heuristicValue)
 			let minimaxValue = minimax(s, 32, 'x');
 			expect(typeof heuristicValue == 'number').to.equal(true);
 			expect(typeof minimaxValue == 'number').to.equal(true);
@@ -172,10 +175,10 @@ describe('Testing some basic functions in the minimax evaluation function', func
 	});
 
 	/* And sadly, here is where the test specs end.
-	   
+
 	   To see if your algorithm really working any more--that is,
 	   to see if it's making intelligent decisions--you'll need
-	   to play it.  "npm start" and go to localhost:8888 to play 
+	   to play it.  "npm start" and go to localhost:8888 to play
 	   against your algorithm.
      */
 

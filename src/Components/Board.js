@@ -2,9 +2,10 @@ import React from 'react'
 import Cell from './Cell'
 import State from '../game_logic/state'
 const makeMove = require('../minimax.js').makeMove;
+const hueristic = require('../minimax.js').heuristic;
 
 export default class Board extends React.Component{
-	
+
 	constructor(props){
 		super(props);
 		this.state = {
@@ -15,10 +16,12 @@ export default class Board extends React.Component{
 
 	moveIfComputerMove(){
 		if (this.state.boardstate.nextMovePlayer !== this.props.humanPlayerIs
-			&& this.props.humanPlayerIs !== null 
+			&& this.props.humanPlayerIs !== null
 			&& this.state.boardstate.legalMoves().length !== 0 ){
 			var that = this;
 			setTimeout(() => {
+				console.log(this.state)
+				//hueristic(this.state, 'x');
 				var move = makeMove(this.state.boardstate);
 				this.setState({boardstate: this.state.boardstate.move(move)});
 			},50);

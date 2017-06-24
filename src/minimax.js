@@ -92,15 +92,24 @@ pieces of that length that that player has.
 You'll want to pass the tests defined in minimax_specs.js.
 */
 const heuristic = (state, maximizingPlayer) => {
-
+	var score = 1;
 	//This is how you can retrieve the minimizing player.
     const minimizingPlayer = (maximizingPlayer == 'x') ? 'o' : 'x';
-
+	const weightOfTwo = 2;
+	const weightOfThree = 3;
+	const weightOfFour = 100;
 	//An example.
     const linesOfLengthTwoForX = state.numLines(2, 'x')
-
-    //Your code here.  Don't return random, obviously.
-	return Math.random()
+	const linesOfLengthThreeForX = state.numLines(3, 'x')
+	const linesOfLengthFourForX = state.numLines(4, 'x')
+	//console.log('called here:', linesOfLengthTwoForX)
+	score = (linesOfLengthTwoForX * weightOfTwo) + (linesOfLengthThreeForX * weightOfThree) + (linesOfLengthFourForX * weightOfFour) + score ;
+	if (maximizingPlayer === 'x') {
+	} else {
+		score*=-1
+	}
+	//console.log(score)
+	return score
 }
 
 
@@ -128,8 +137,18 @@ const minimax = (state, depth, maximizingPlayer) => {
 	var minimizingPlayer = (maximizingPlayer == 'x') ? 'o' : 'x';
 	var possibleStates = state.nextStates();
 	var currentPlayer = state.nextMovePlayer;
+	var heuristicVal = heuristic(state, maximizingPlayer)
+	var maxValue = 0;
+	// while(depth) {
+
+	// }
 	//Your code here.
-	return Math.random();
+	// if(depth === 0) {
+	// 	return heuristicVal;
+	// } else {
+	// 	return heuristicVal;
+	// }
+	return heuristicVal;
 }
 
 
